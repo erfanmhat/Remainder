@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/itemProfile"
+        android:icon="@drawable/ic_profile"
+        android:title="@string/profile"/>
+
+    <item
+        android:id="@+id/itemSettings"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/settings"/>
+
+    <item
+        android:id="@+id/itemAboutUs"
+        android:icon="@drawable/ic_about_us"
+        android:title="@string/about_us"/>
+
+    <item
+        android:id="@+id/itemExit"
+        android:icon="@drawable/ic_exit"
+        android:title="@string/exit"/>
+</menu>
