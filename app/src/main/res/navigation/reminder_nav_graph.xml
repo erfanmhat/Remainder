@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/reminder_nav_graph"
+    app:startDestination="@id/userProgramsFragment">
+
+    <fragment
+        android:id="@+id/userProgramsFragment"
+        android:name="ir.erfan_mh_at.android.reminder.ui.fragment.UserProgramsFragment"
+        android:label="UserProgramsFragment">
+        <action
+            android:id="@+id/action_userProgramsFragment_to_articleFragment"
+            app:destination="@id/articleFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/financialManagementFragment"
+        android:name="ir.erfan_mh_at.android.reminder.ui.fragment.FinancialManagementFragment"
+        android:label="FinancialManagementFragment">
+        <action
+            android:id="@+id/action_financialManagementFragment_to_articleFragment"
+            app:destination="@id/articleFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/appraisalFragment"
+        android:name="ir.erfan_mh_at.android.reminder.ui.fragment.AppraisalFragment"
+        android:label="AppraisalFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right">
+        <action
+            android:id="@+id/action_appraisalFragment_to_articleFragment"
+            app:destination="@id/articleFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/articleFragment"
+        android:name="ir.erfan_mh_at.android.reminder.ui.fragment.ArticleFragment"
+        android:label="ArticleFragment" />
+</navigation>
