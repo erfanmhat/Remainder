@@ -13,7 +13,6 @@ data class AnyObject(
     @PrimaryKey(autoGenerate = true)
     var id: Int? = null,
 //    @ForeignKey() TODO
-    val anyObject_alarm_id:Int?=null,
     val anyObject_id:Int?=null,
     val name: String,
     val type: Int,//###
@@ -21,5 +20,5 @@ data class AnyObject(
     val image: String,//###
     val data: String,
     val updated_at: Time,//###
-    val created_at: Time
+    val created_at: Time//###
 )
