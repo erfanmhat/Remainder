@@ -16,9 +16,9 @@ data class AnyObject(
     val anyObject_id:Int?=null,
     val name: String,
     val type: Int,//###
-    val color: Color,//###
-    val image: String,//###
+    val color: String?,//###
+    val image: String?,//###
     val data: String,
-    val updated_at: Time,//###
-    val created_at: Time//###
+    val updated_at: String?,//###
+    val created_at: String?//###
 )
