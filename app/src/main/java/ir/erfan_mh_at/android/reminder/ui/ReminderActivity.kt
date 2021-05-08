@@ -5,18 +5,29 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import ir.erfan_mh_at.android.reminder.R
+import ir.erfan_mh_at.android.reminder.db.ReminderDatabase
+import ir.erfan_mh_at.android.reminder.repositorys.AnyObjectRepository
+import ir.erfan_mh_at.android.reminder.ui.provider_factory.AnyObjectViewModelProviderFactory
+import ir.erfan_mh_at.android.reminder.ui.view_models.AnyObjectViewModel
 import kotlinx.android.synthetic.main.activity_reminder.*
 
 class ReminderActivity : AppCompatActivity() {
     lateinit var toggle: ActionBarDrawerToggle
+    lateinit var anyObjectViewModel: AnyObjectViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reminder)
-        configure();
+
+        val anyObjectRepository = AnyObjectRepository(ReminderDatabase(this))
+        val viewModelProviderFactory = AnyObjectViewModelProviderFactory(anyObjectRepository)
+        anyObjectViewModel = ViewModelProvider(this,viewModelProviderFactory).get(AnyObjectViewModel::class.java)
+
+        configure()
     }
 
     private fun configure(){

@@ -19,7 +19,7 @@ abstract class ReminderDatabase : RoomDatabase() {
 
     companion object {
         @Volatile
-        private var instance: RoomDatabase? = null
+        private var instance: ReminderDatabase? = null
         private val LOCK = Any()
 
         operator fun invoke(context: Context) = instance ?: synchronized(LOCK) {
