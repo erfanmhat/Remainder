@@ -3,6 +3,7 @@ package ir.erfan_mh_at.android.reminder.ui.fragment
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import ir.erfan_mh_at.android.reminder.R
 import ir.erfan_mh_at.android.reminder.adapters.AnyObjectAdapter
@@ -19,19 +20,19 @@ class UserProgramsFragment : Fragment(R.layout.fragment_user_programs) {
         super.onViewCreated(view, savedInstanceState)
         anyObjectViewModel = (activity as ReminderActivity).anyObjectViewModel
 
-        val anyObjectAdapter = AnyObjectAdapter()
+        anyObjectAdapter = AnyObjectAdapter()
         anyObjectAdapter.differ.submitList(
             listOf(
-                AnyObject(1,null,"n1",0,null,null,"asdf",null,null),
-                AnyObject(2,null,"n2",0,null,null,"asdf",null,null),
-                AnyObject(3,null,"n3",0,null,null,"asdf",null,null),
-                AnyObject(4,null,"n4",0,null,null,"asdf",null,null),
-                AnyObject(5,null,"n5",0,null,null,"asdf",null,null)
+                AnyObject(1,null,"name one",0,null,null,getString(R.string.lorem_ipsum),null,"May 5,2021"),
+                AnyObject(2,null,"name two",0,null,null,"sd fsa df asd f as df",null,"May 6,2021"),
+                AnyObject(3,null,"name three",0,null,null,getString(R.string.lorem_ipsum),null,"May 7,2021"),
+                AnyObject(4,null,"name four",0,null,null,"sd fsa df asd f as df",null,"May 8,2021"),
+                AnyObject(5,null,"name five",0,null,null,getString(R.string.lorem_ipsum),null,"May 9,2021")
             )
         )
         rvAnyObject.apply {
             adapter = anyObjectAdapter
-            layoutManager = LinearLayoutManager(this@UserProgramsFragment.context)
+            layoutManager = GridLayoutManager(this@UserProgramsFragment.context,2)
         }
     }
 }

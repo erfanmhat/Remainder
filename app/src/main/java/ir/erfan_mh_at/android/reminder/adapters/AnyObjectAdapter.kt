@@ -41,6 +41,8 @@ class AnyObjectAdapter : RecyclerView.Adapter<AnyObjectAdapter.AnyObjectViewHold
         val anyObject = differ.currentList[position]
         holder.itemView.apply {
             tvName.text = anyObject.name
+            tvCreateAt.text = anyObject.created_at
+            tvContent.text = anyObject.data
             setOnClickListener {
                 onItemClickListener?.let {
                     it(anyObject)
