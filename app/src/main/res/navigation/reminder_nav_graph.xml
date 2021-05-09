@@ -9,21 +9,8 @@
         android:name="ir.erfan_mh_at.android.reminder.ui.fragment.UserProgramsFragment"
         android:label="UserProgramsFragment">
         <action
-            android:id="@+id/action_userProgramsFragment_to_articleFragment"
-            app:destination="@id/articleFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/financialManagementFragment"
-        android:name="ir.erfan_mh_at.android.reminder.ui.fragment.FinancialManagementFragment"
-        android:label="FinancialManagementFragment">
-        <action
-            android:id="@+id/action_financialManagementFragment_to_articleFragment"
-            app:destination="@id/articleFragment"
+            android:id="@+id/action_userProgramsFragment_to_showAnyObjectFragment"
+            app:destination="@id/showAnyObjectFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -33,14 +20,10 @@
     <fragment
         android:id="@+id/appraisalFragment"
         android:name="ir.erfan_mh_at.android.reminder.ui.fragment.AppraisalFragment"
-        android:label="AppraisalFragment"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right">
+        android:label="AppraisalFragment">
         <action
-            android:id="@+id/action_appraisalFragment_to_articleFragment"
-            app:destination="@id/articleFragment"
+            android:id="@+id/action_appraisalFragment_to_showAnyObjectFragment"
+            app:destination="@id/showAnyObjectFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -48,7 +31,17 @@
     </fragment>
 
     <fragment
+        android:id="@+id/financialManagementFragment"
+        android:name="ir.erfan_mh_at.android.reminder.ui.fragment.FinancialManagementFragment"
+        android:label="FinancialManagementFragment" />
+
+    <fragment
         android:id="@+id/articleFragment"
         android:name="ir.erfan_mh_at.android.reminder.ui.fragment.ArticleFragment"
         android:label="ArticleFragment" />
+
+    <fragment
+        android:id="@+id/showAnyObjectFragment"
+        android:name="ir.erfan_mh_at.android.reminder.ui.fragment.ShowAnyObjectFragment"
+        android:label="ShowAnyObject" />
 </navigation>

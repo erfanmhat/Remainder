@@ -3,16 +3,16 @@
 
     <item
         android:id="@+id/userProgramsFragment"
-        android:title="User Programs"
+        android:title="@string/user_programs"
         android:icon="@drawable/ic_user_programs"/>
 
     <item
         android:id="@+id/financialManagementFragment"
-        android:title="financial management"
+        android:title="@string/financial"
         android:icon="@drawable/ic_financial_management"/>
 
     <item
         android:id="@+id/appraisalFragment"
-        android:title="appraisal"
+        android:title="@string/appraisal"
         android:icon="@drawable/ic_appraisal"/>
 </menu>

@@ -2,6 +2,7 @@ package ir.erfan_mh_at.android.reminder.ui.fragment
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import ir.erfan_mh_at.android.reminder.R
@@ -9,10 +10,10 @@ import ir.erfan_mh_at.android.reminder.adapters.AnyObjectAdapter
 import ir.erfan_mh_at.android.reminder.db.entitys.AnyObject
 import ir.erfan_mh_at.android.reminder.ui.ReminderActivity
 import ir.erfan_mh_at.android.reminder.ui.view_models.AnyObjectViewModel
-import kotlinx.android.synthetic.main.fragment_user_programs.*
+import kotlinx.android.synthetic.main.fragment_show_any_object.*
 import kotlinx.android.synthetic.main.layout_any_object_recyclerview.*
 
-class UserProgramsFragment : Fragment(R.layout.fragment_user_programs) {
+class ShowAnyObjectFragment : Fragment(R.layout.fragment_show_any_object) {
     lateinit var anyObjectViewModel: AnyObjectViewModel
     lateinit var anyObjectAdapter: AnyObjectAdapter
 
@@ -31,7 +32,7 @@ class UserProgramsFragment : Fragment(R.layout.fragment_user_programs) {
                 AnyObject(
                     1,
                     null,
-                    "name one",
+                    "name 1",
                     0,
                     null,
                     null,
@@ -42,7 +43,7 @@ class UserProgramsFragment : Fragment(R.layout.fragment_user_programs) {
                 AnyObject(
                     2,
                     null,
-                    "name two",
+                    "name 2",
                     0,
                     null,
                     null,
@@ -53,7 +54,7 @@ class UserProgramsFragment : Fragment(R.layout.fragment_user_programs) {
                 AnyObject(
                     3,
                     null,
-                    "name three",
+                    "name 3",
                     0,
                     null,
                     null,
@@ -64,7 +65,7 @@ class UserProgramsFragment : Fragment(R.layout.fragment_user_programs) {
                 AnyObject(
                     4,
                     null,
-                    "name four",
+                    "name 4",
                     0,
                     null,
                     null,
@@ -75,7 +76,7 @@ class UserProgramsFragment : Fragment(R.layout.fragment_user_programs) {
                 AnyObject(
                     5,
                     null,
-                    "name five",
+                    "name 5",
                     0,
                     null,
                     null,
@@ -87,18 +88,14 @@ class UserProgramsFragment : Fragment(R.layout.fragment_user_programs) {
         )
         rvAnyObject.apply {
             adapter = anyObjectAdapter
-            layoutManager = GridLayoutManager(this@UserProgramsFragment.context, 2)
+            layoutManager = GridLayoutManager(this@ShowAnyObjectFragment.context, 2)
         }
     }
 
     private fun configure() {
+        tvName.text = "sadf"
         anyObjectAdapter.setOnItemClickListener {
-            val showAnyObjectFragment = ShowAnyObjectFragment()
-            (activity as ReminderActivity).supportFragmentManager.beginTransaction().apply {
-                replace(R.id.flFragmentShow, showAnyObjectFragment)
-                addToBackStack(it.id?.toString())
-                commit()
-            }
+            Toast.makeText(this.context, it.name, Toast.LENGTH_SHORT).show()
         }
     }
 }

@@ -7,4 +7,7 @@
     <string name="settings">Settings</string>
     <string name="about_us">About us</string>
     <string name="lorem_ipsum">in publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available.</string>
+    <string name="user_programs">User Programs</string>
+    <string name="appraisal">appraisal</string>
+    <string name="financial">financial</string>
 </resources>
