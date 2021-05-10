@@ -1,10 +1,8 @@
 package ir.erfan_mh_at.android.reminder.db.entitys
 
-import android.graphics.Color
 import androidx.room.Entity
-import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import java.sql.Time
+import java.io.Serializable
 
 @Entity(
     tableName = "any_objects"
@@ -13,7 +11,7 @@ data class AnyObject(
     @PrimaryKey(autoGenerate = true)
     var id: Int? = null,
 //    @ForeignKey() TODO
-    val anyObject_id:Int?=null,
+    val anyObject_id: Int? = null,
     val name: String,
     val type: Int,//###
     val color: String?,//###
@@ -21,4 +19,4 @@ data class AnyObject(
     val data: String,
     val updated_at: String?,//###
     val created_at: String?//###
-)
+) : Serializable

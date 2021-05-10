@@ -43,5 +43,16 @@
     <fragment
         android:id="@+id/showAnyObjectFragment"
         android:name="ir.erfan_mh_at.android.reminder.ui.fragment.ShowAnyObjectFragment"
-        android:label="ShowAnyObject" />
+        android:label="ShowAnyObject">
+        <argument
+            android:name="anyObject"
+            app:argType="ir.erfan_mh_at.android.reminder.db.entitys.AnyObject" />
+        <action
+            android:id="@+id/action_showAnyObjectFragment_self"
+            app:destination="@id/showAnyObjectFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
 </navigation>

@@ -3,6 +3,7 @@ package ir.erfan_mh_at.android.reminder.ui.fragment
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import ir.erfan_mh_at.android.reminder.R
 import ir.erfan_mh_at.android.reminder.adapters.AnyObjectAdapter
@@ -18,87 +19,52 @@ class UserProgramsFragment : Fragment(R.layout.fragment_user_programs) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupRecyclerView()
         configure()
+    }
+
+    private fun configure() {
+        setupRecyclerView()
+        setOnClicks()
     }
 
     private fun setupRecyclerView() {
         anyObjectViewModel = (activity as ReminderActivity).anyObjectViewModel
-
         anyObjectAdapter = AnyObjectAdapter()
-        anyObjectAdapter.differ.submitList(
-            listOf(
-                AnyObject(
-                    1,
-                    null,
-                    "name one",
-                    0,
-                    null,
-                    null,
-                    getString(R.string.lorem_ipsum),
-                    null,
-                    "May 5,2021"
-                ),
-                AnyObject(
-                    2,
-                    null,
-                    "name two",
-                    0,
-                    null,
-                    null,
-                    "sd fsa df asd f as df",
-                    null,
-                    "May 6,2021"
-                ),
-                AnyObject(
-                    3,
-                    null,
-                    "name three",
-                    0,
-                    null,
-                    null,
-                    getString(R.string.lorem_ipsum),
-                    null,
-                    "May 7,2021"
-                ),
-                AnyObject(
-                    4,
-                    null,
-                    "name four",
-                    0,
-                    null,
-                    null,
-                    "sd fsa df asd f as df",
-                    null,
-                    "May 8,2021"
-                ),
-                AnyObject(
-                    5,
-                    null,
-                    "name five",
-                    0,
-                    null,
-                    null,
-                    getString(R.string.lorem_ipsum),
-                    null,
-                    "May 9,2021"
-                )
+
+        anyObjectViewModel.getAllAnyObjectWithParentId(0).observe(this.viewLifecycleOwner, {
+            anyObjectAdapter.differ.submitList(
+                it
             )
-        )
+        })
         rvAnyObject.apply {
             adapter = anyObjectAdapter
             layoutManager = GridLayoutManager(this@UserProgramsFragment.context, 2)
         }
     }
 
-    private fun configure() {
-        anyObjectAdapter.setOnItemClickListener {
-            val showAnyObjectFragment = ShowAnyObjectFragment()
-            (activity as ReminderActivity).supportFragmentManager.beginTransaction().apply {
-                replace(R.id.flFragmentShow, showAnyObjectFragment)
-                addToBackStack(it.id?.toString())
-                commit()
+    private fun setOnClicks() {
+        fabAddAnyObject.setOnClickListener {
+            val bundle = Bundle().apply {
+                putSerializable(
+                    "anyObject",
+                    AnyObject(
+                        0, 0, "", 1, null, null, "", null, null
+                    )
+                )
             }
+            findNavController().navigate(
+                R.id.action_userProgramsFragment_to_showAnyObjectFragment,
+                bundle
+            )
+        }
+        anyObjectAdapter.setOnItemClickListener {
+            val bundle = Bundle().apply {
+                putSerializable("anyObject", it)
+            }
+            findNavController().navigate(
+                R.id.action_userProgramsFragment_to_showAnyObjectFragment,
+                bundle
+            )
         }
     }
 }

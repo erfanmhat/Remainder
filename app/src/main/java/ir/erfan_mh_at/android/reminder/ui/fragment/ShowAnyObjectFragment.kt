@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import ir.erfan_mh_at.android.reminder.R
 import ir.erfan_mh_at.android.reminder.adapters.AnyObjectAdapter
@@ -16,86 +18,71 @@ import kotlinx.android.synthetic.main.layout_any_object_recyclerview.*
 class ShowAnyObjectFragment : Fragment(R.layout.fragment_show_any_object) {
     lateinit var anyObjectViewModel: AnyObjectViewModel
     lateinit var anyObjectAdapter: AnyObjectAdapter
+    private lateinit var anyObject: AnyObject
+    private val args: ShowAnyObjectFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupRecyclerView()
         configure()
+    }
+
+    private fun configure() {
+        anyObject = args.anyObject
+        etName.setText(anyObject.name)
+        etData.setText(anyObject.data)
+        setupRecyclerView()
+        setOnClicks()
     }
 
     private fun setupRecyclerView() {
         anyObjectViewModel = (activity as ReminderActivity).anyObjectViewModel
 
         anyObjectAdapter = AnyObjectAdapter()
-        anyObjectAdapter.differ.submitList(
-            listOf(
-                AnyObject(
-                    1,
-                    null,
-                    "name 1",
-                    0,
-                    null,
-                    null,
-                    getString(R.string.lorem_ipsum),
-                    null,
-                    "May 5,2021"
-                ),
-                AnyObject(
-                    2,
-                    null,
-                    "name 2",
-                    0,
-                    null,
-                    null,
-                    "sd fsa df asd f as df",
-                    null,
-                    "May 6,2021"
-                ),
-                AnyObject(
-                    3,
-                    null,
-                    "name 3",
-                    0,
-                    null,
-                    null,
-                    getString(R.string.lorem_ipsum),
-                    null,
-                    "May 7,2021"
-                ),
-                AnyObject(
-                    4,
-                    null,
-                    "name 4",
-                    0,
-                    null,
-                    null,
-                    "sd fsa df asd f as df",
-                    null,
-                    "May 8,2021"
-                ),
-                AnyObject(
-                    5,
-                    null,
-                    "name 5",
-                    0,
-                    null,
-                    null,
-                    getString(R.string.lorem_ipsum),
-                    null,
-                    "May 9,2021"
+        anyObjectViewModel.getAllAnyObjectWithParentId(anyObject.id)
+            .observe(this.viewLifecycleOwner, {
+                anyObjectAdapter.differ.submitList(
+                    it
                 )
-            )
-        )
+            })
         rvAnyObject.apply {
             adapter = anyObjectAdapter
             layoutManager = GridLayoutManager(this@ShowAnyObjectFragment.context, 2)
         }
     }
 
-    private fun configure() {
-        tvName.text = "sadf"
+    private fun setOnClicks() {
+        ivSave.setOnClickListener {
+            anyObjectViewModel.upsert(
+                AnyObject(
+                    null,
+                    anyObject.anyObject_id,
+                    etName.text.toString(),
+                    1,
+                    null,
+                    null,
+                    etData.text.toString(),
+                    null,
+                    null
+                )
+            )
+        }
         anyObjectAdapter.setOnItemClickListener {
             Toast.makeText(this.context, it.name, Toast.LENGTH_SHORT).show()
+        }
+
+        fabAddAnyObject.setOnClickListener {
+            val bundle = Bundle().apply {
+                putSerializable(
+                    "anyObject",
+                    AnyObject(
+                        null, anyObject.id, "", 1, null, null, "", null, null
+                    )
+                )
+            }
+            findNavController().navigate(
+                R.id.action_showAnyObjectFragment_self,
+                bundle
+            )
         }
     }
 }
