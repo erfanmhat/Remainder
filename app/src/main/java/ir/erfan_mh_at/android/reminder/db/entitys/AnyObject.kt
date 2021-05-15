@@ -11,12 +11,12 @@ data class AnyObject(
     @PrimaryKey(autoGenerate = true)
     var id: Int? = null,
 //    @ForeignKey() TODO
-    val anyObject_id: Int? = null,
-    val name: String,
-    val type: Int,//###
-    val color: String?,//###
-    val image: String?,//###
-    val data: String,
-    val updated_at: String?,//###
-    val created_at: String?//###
+    var anyObject_id: Int? = null,
+    var name: String,
+    var type: Int,//###
+    var color: String?,//###
+    var image: String?,//###
+    var data: String,
+    var updated_at: String?,//###
+    var created_at: String?//###
 ) : Serializable

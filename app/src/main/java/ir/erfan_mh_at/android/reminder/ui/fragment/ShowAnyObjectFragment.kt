@@ -1,12 +1,12 @@
 package ir.erfan_mh_at.android.reminder.ui.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import ir.erfan_mh_at.android.reminder.R
@@ -17,6 +17,11 @@ import ir.erfan_mh_at.android.reminder.ui.ReminderActivity
 import ir.erfan_mh_at.android.reminder.ui.view_models.AnyObjectViewModel
 import kotlinx.android.synthetic.main.fragment_show_any_object.*
 import kotlinx.android.synthetic.main.layout_any_object_recyclerview.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ShowAnyObjectFragment : Fragment(R.layout.fragment_show_any_object) {
     lateinit var anyObjectViewModel: AnyObjectViewModel
@@ -41,11 +46,13 @@ class ShowAnyObjectFragment : Fragment(R.layout.fragment_show_any_object) {
         anyObject = args.anyObject
         etName.setText(anyObject.name)
         etData.setText(anyObject.data)
+        tvCreateAt.text=anyObject.created_at
     }
 
     private fun setFont(){
         etName.typeface = AppFonts.SUMMER_CALLING_FONT
         etData.typeface = AppFonts.SUMMER_CALLING_FONT
+        tvCreateAt.typeface = AppFonts.SUMMER_CALLING_FONT
     }
 
     private fun setupRecyclerView() {
@@ -100,19 +107,29 @@ class ShowAnyObjectFragment : Fragment(R.layout.fragment_show_any_object) {
         }
     }
 
-    private fun save(){
-        anyObjectViewModel.upsert(
-            AnyObject(
-                anyObject.id,
-                anyObject.anyObject_id,
-                etName.text.toString(),
-                anyObject.type,
-                anyObject.color,
-                anyObject.image,
-                etData.text.toString(),
-                anyObject.updated_at,
+    @SuppressLint("SimpleDateFormat")
+    private fun save() {
+        val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
+        val currentDate = sdf.format(Date())
+        val createdAt =
+            if (anyObject.created_at != null) {
                 anyObject.created_at
-            )
-        )
+            } else {
+                currentDate
+            }
+
+        GlobalScope.launch {
+            val anyObjectId = async {
+                anyObjectViewModel.upsert(
+                    anyObject.apply {
+                        name = etName.text.toString()
+                        data = etData.text.toString()
+                        updated_at = currentDate
+                        created_at = createdAt
+                    }
+                )
+            }
+            anyObject.id = anyObjectId.await().toInt()
+        }
     }
 }

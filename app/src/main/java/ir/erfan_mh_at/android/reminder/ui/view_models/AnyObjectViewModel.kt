@@ -11,9 +11,10 @@ class AnyObjectViewModel(
     val anyObjectRepository : AnyObjectRepository
 ) : ViewModel() {
 
-    fun upsert(item: AnyObject) = CoroutineScope(Dispatchers.Main).launch {
-        anyObjectRepository.upsertAnyObject(item)
+    suspend fun upsert(item: AnyObject) :Long {
+        return anyObjectRepository.upsertAnyObject(item)
     }
+
 
     fun delete(item: AnyObject) = CoroutineScope(Dispatchers.Main).launch {
         anyObjectRepository.deleteAnyObject(item)
