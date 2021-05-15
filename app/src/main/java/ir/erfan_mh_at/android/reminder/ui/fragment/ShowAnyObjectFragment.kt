@@ -2,12 +2,15 @@ package ir.erfan_mh_at.android.reminder.ui.fragment
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import ir.erfan_mh_at.android.reminder.R
 import ir.erfan_mh_at.android.reminder.adapters.AnyObjectAdapter
+import ir.erfan_mh_at.android.reminder.app.AppFonts
+import ir.erfan_mh_at.android.reminder.app.ReminderApplication
 import ir.erfan_mh_at.android.reminder.db.entitys.AnyObject
 import ir.erfan_mh_at.android.reminder.ui.ReminderActivity
 import ir.erfan_mh_at.android.reminder.ui.view_models.AnyObjectViewModel
@@ -29,6 +32,10 @@ class ShowAnyObjectFragment : Fragment(R.layout.fragment_show_any_object) {
         anyObject = args.anyObject
         etName.setText(anyObject.name)
         etData.setText(anyObject.data)
+
+        etName.typeface = AppFonts.SUMMER_CALLING_FONT
+        etData.typeface = AppFonts.SUMMER_CALLING_FONT
+
         setupRecyclerView()
         setOnClicks()
     }

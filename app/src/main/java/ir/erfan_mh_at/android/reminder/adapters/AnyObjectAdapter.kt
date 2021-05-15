@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ir.erfan_mh_at.android.reminder.R
+import ir.erfan_mh_at.android.reminder.app.AppFonts
 import ir.erfan_mh_at.android.reminder.db.entitys.AnyObject
 import kotlinx.android.synthetic.main.layout_any_object.view.*
 
@@ -43,6 +44,11 @@ class AnyObjectAdapter : RecyclerView.Adapter<AnyObjectAdapter.AnyObjectViewHold
             tvName.text = anyObject.name
             tvCreateAt.text = anyObject.created_at
             tvContent.text = anyObject.data
+
+            tvName.typeface = AppFonts.SUMMER_CALLING_FONT
+            tvCreateAt.typeface = AppFonts.SUMMER_CALLING_FONT
+            tvContent.typeface = AppFonts.SUMMER_CALLING_FONT
+
             setOnClickListener {
                 onItemClickListener?.let {
                     it(anyObject)
