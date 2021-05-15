@@ -2,7 +2,7 @@ package ir.erfan_mh_at.android.reminder.ui.fragment
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.content.res.ResourcesCompat
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import ir.erfan_mh_at.android.reminder.R
 import ir.erfan_mh_at.android.reminder.adapters.AnyObjectAdapter
 import ir.erfan_mh_at.android.reminder.app.AppFonts
-import ir.erfan_mh_at.android.reminder.app.ReminderApplication
 import ir.erfan_mh_at.android.reminder.db.entitys.AnyObject
 import ir.erfan_mh_at.android.reminder.ui.ReminderActivity
 import ir.erfan_mh_at.android.reminder.ui.view_models.AnyObjectViewModel
@@ -29,15 +28,22 @@ class ShowAnyObjectFragment : Fragment(R.layout.fragment_show_any_object) {
     }
 
     private fun configure() {
+        setVariable()
+        setFont()
+        setupRecyclerView()
+        setOnClicks()
+        setTextChangedListener()
+    }
+
+    private fun setVariable(){
         anyObject = args.anyObject
         etName.setText(anyObject.name)
         etData.setText(anyObject.data)
+    }
 
+    private fun setFont(){
         etName.typeface = AppFonts.SUMMER_CALLING_FONT
         etData.typeface = AppFonts.SUMMER_CALLING_FONT
-
-        setupRecyclerView()
-        setOnClicks()
     }
 
     private fun setupRecyclerView() {
@@ -57,21 +63,6 @@ class ShowAnyObjectFragment : Fragment(R.layout.fragment_show_any_object) {
     }
 
     private fun setOnClicks() {
-        ivSave.setOnClickListener {
-            anyObjectViewModel.upsert(
-                AnyObject(
-                    null,
-                    anyObject.anyObject_id,
-                    etName.text.toString(),
-                    1,
-                    null,
-                    null,
-                    etData.text.toString(),
-                    null,
-                    null
-                )
-            )
-        }
         anyObjectAdapter.setOnItemClickListener {
             val bundle = Bundle().apply {
                 putSerializable("anyObject", it)
@@ -96,5 +87,30 @@ class ShowAnyObjectFragment : Fragment(R.layout.fragment_show_any_object) {
                 bundle
             )
         }
+    }
+
+    private fun setTextChangedListener(){
+        etName.addTextChangedListener {
+            save()
+        }
+        etData.addTextChangedListener{
+            save()
+        }
+    }
+
+    private fun save(){
+        anyObjectViewModel.upsert(
+            AnyObject(
+                anyObject.id,
+                anyObject.anyObject_id,
+                etName.text.toString(),
+                anyObject.type,
+                anyObject.color,
+                anyObject.image,
+                etData.text.toString(),
+                anyObject.updated_at,
+                anyObject.created_at
+            )
+        )
     }
 }
