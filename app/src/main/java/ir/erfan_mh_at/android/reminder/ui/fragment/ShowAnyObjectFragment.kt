@@ -2,7 +2,6 @@ package ir.erfan_mh_at.android.reminder.ui.fragment
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -67,7 +66,13 @@ class ShowAnyObjectFragment : Fragment(R.layout.fragment_show_any_object) {
             )
         }
         anyObjectAdapter.setOnItemClickListener {
-            Toast.makeText(this.context, it.name, Toast.LENGTH_SHORT).show()
+            val bundle = Bundle().apply {
+                putSerializable("anyObject", it)
+            }
+            findNavController().navigate(
+                R.id.action_showAnyObjectFragment_self,
+                bundle
+            )
         }
 
         fabAddAnyObject.setOnClickListener {

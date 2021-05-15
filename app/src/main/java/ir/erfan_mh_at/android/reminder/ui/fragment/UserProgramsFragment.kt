@@ -48,7 +48,7 @@ class UserProgramsFragment : Fragment(R.layout.fragment_user_programs) {
                 putSerializable(
                     "anyObject",
                     AnyObject(
-                        0, 0, "", 1, null, null, "", null, null
+                        null, 0, "", 1, null, null, "", null, null
                     )
                 )
             }
