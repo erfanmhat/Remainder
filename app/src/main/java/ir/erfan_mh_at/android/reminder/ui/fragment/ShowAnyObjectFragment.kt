@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import ir.erfan_mh_at.android.reminder.R
 import ir.erfan_mh_at.android.reminder.adapters.AnyObjectAdapter
 import ir.erfan_mh_at.android.reminder.app.AppFonts
@@ -58,7 +60,7 @@ class ShowAnyObjectFragment : Fragment(R.layout.fragment_show_any_object) {
             })
         rvAnyObject.apply {
             adapter = anyObjectAdapter
-            layoutManager = GridLayoutManager(this@ShowAnyObjectFragment.context, 2)
+            layoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
         }
     }
 

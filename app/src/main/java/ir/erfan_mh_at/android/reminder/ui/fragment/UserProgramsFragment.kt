@@ -5,6 +5,8 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import ir.erfan_mh_at.android.reminder.R
 import ir.erfan_mh_at.android.reminder.adapters.AnyObjectAdapter
 import ir.erfan_mh_at.android.reminder.db.entitys.AnyObject
@@ -38,7 +40,7 @@ class UserProgramsFragment : Fragment(R.layout.fragment_user_programs) {
         })
         rvAnyObject.apply {
             adapter = anyObjectAdapter
-            layoutManager = GridLayoutManager(this@UserProgramsFragment.context, 2)
+            layoutManager = StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL)
         }
     }
 
